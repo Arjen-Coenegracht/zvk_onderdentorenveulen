@@ -8,6 +8,7 @@ import type {
   TransferUpdate,
 } from '@/types';
 import schroyenPlayerCard from '@/assets/players/Schroyen_Speler_kaart.svg';
+import schroyenHondje from '@/assets/players/Schroyen_speler_hondje.svg';
 import bipinPlayerImage from '@/assets/players/bipin.svg';
 import mathPlayerImage from '@/assets/players/math.svg';
 import runePlayerImage from '@/assets/players/rune.svg';
@@ -501,7 +502,7 @@ export const squadPlayers: SquadPlayer[] = [
     assists: 0,
     matches: 0,
     playerOfTheMatch: 0,
-    image: schroyenPlayerCard,
+    image: schroyenHondje,
     customStats: [
       { label: 'Goals', value: 4 },
       { label: 'Bokken gedronken', value: 155 },
