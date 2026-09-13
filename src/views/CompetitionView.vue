@@ -20,8 +20,8 @@
             </span>
           </template>
           <template v-else>
-            <strong>Nieuw seizoen</strong>
-            <span>De kalender en reeksindeling volgen later.</span>
+            <strong>21 wedstrijden</strong>
+            <span>Reeks 1 · Liga Borgloon–Heers</span>
           </template>
         </aside>
       </div>
@@ -37,16 +37,59 @@
           </select>
         </div>
 
-        <div v-if="!isPreviousSeason" class="panel panel--soft season-empty-state">
-          <p class="section-kicker">Seizoen 2026–2027</p>
-          <h2>Nog geen gegevens beschikbaar.</h2>
-          <p>
-            De wedstrijden en het klassement van het nieuwe seizoen zijn nog niet bekend.
-            Zodra de kalender beschikbaar is, vind je die hier.
-          </p>
+        <div v-if="!isPreviousSeason" class="competition-layout">
+          <div class="panel panel--soft competition-panel competition-panel--results">
+            <h3 class="block-title">Wedstrijden 2026–2027</h3>
+            <div class="match-listing">
+              <article v-for="match in newSeasonMatches" :key="match.key" class="match-line match-line--with-location">
+                <span class="match-line__date">{{ match.meta }}</span>
+                <span class="match-line__team match-line__team--home match-line__team--primary">{{ match.homeTeam }}</span>
+                <span class="match-line__score">-</span>
+                <span class="match-line__team match-line__team--secondary">{{ match.awayTeam }}</span>
+                <span class="match-line__tag">{{ match.tag }}</span>
+                <span class="match-line__location">{{ match.location }}</span>
+              </article>
+            </div>
+          </div>
+
+          <div class="panel panel--red competition-panel competition-panel--standings">
+            <h3 class="block-title">Klassement 2026–2027</h3>
+            <div class="table-wrap">
+              <table class="standings-table">
+                <thead><tr><th>#</th><th>Ploeg</th><th>GP</th><th>W</th><th>G</th><th>V</th><th>DV</th><th>DT</th><th>Pts</th></tr></thead>
+                <tbody>
+                  <tr v-for="row in provisionalStandings" :key="row.team" :class="{ 'is-team-row': row.team === teamName }">
+                    <td data-label="#">{{ row.position }}</td><td data-label="Ploeg">{{ row.team }}</td>
+                    <td data-label="GP">0</td><td data-label="W">0</td><td data-label="G">0</td><td data-label="V">0</td>
+                    <td data-label="DV">0</td><td data-label="DT">0</td><td data-label="Pts">0</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
 
-        <div v-else class="competition-layout">
+        <div v-if="false" class="panel panel--soft competition-panel">
+          <p class="section-kicker">Seizoen 2026–2027</p>
+          <h2 class="block-title">Wedstrijdkalender</h2>
+          <div class="season-schedule">
+            <article v-for="match in seasonMatches" :key="`${match.date}-${match.title}`" class="schedule-card">
+              <div class="schedule-card__date">
+                <strong>{{ formatDay(match.date) }}</strong>
+                <span>{{ formatMonth(match.date) }}</span>
+              </div>
+              <div class="schedule-card__match">
+                <span>{{ match.time }} · {{ match.description }}</span>
+                <h3>{{ formatMatchTitle(match.title) }}</h3>
+                <p v-if="match.venue" class="schedule-card__venue">
+                  {{ match.venue }}
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div v-if="isPreviousSeason" class="competition-layout">
         <div class="panel panel--soft competition-panel competition-panel--results">
           <h3 class="block-title">Wedstrijden 2025–2026</h3>
           <div class="match-listing">
@@ -132,17 +175,23 @@ const currentTeamStanding =
 
 const currentTeamName = currentTeamStanding.team;
 
-const toMatchDateTime = (date: string, time: string) => new Date(`${date}T${time}:00`);
-
-const upcomingMatches = [...agenda]
-  .sort((a, b) => toMatchDateTime(b.date, b.time).getTime() - toMatchDateTime(a.date, a.time).getTime())
-  .filter((match) => toMatchDateTime(match.date, match.time).getTime() >= Date.now());
+const seasonMatches = [...agenda].sort(
+  (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+);
 
 const formatDate = (date: string) =>
   new Intl.DateTimeFormat('nl-BE', {
     day: '2-digit',
     month: 'short',
   }).format(new Date(date));
+
+const formatDay = (date: string) =>
+  new Intl.DateTimeFormat('nl-BE', { day: '2-digit' }).format(new Date(date));
+
+const formatMonth = (date: string) =>
+  new Intl.DateTimeFormat('nl-BE', { month: 'short' }).format(new Date(date));
+
+const formatMatchTitle = (title: string) => title.replace(' vs. ', ' – ');
 
 const splitMatchTitle = (title: string) => {
   const [home, away] = title.split(' vs. ');
@@ -152,18 +201,25 @@ const splitMatchTitle = (title: string) => {
   };
 };
 
+const newSeasonMatches = seasonMatches.map((match) => {
+  const teams = splitMatchTitle(match.title);
+  return {
+    key: `${match.date}-${match.title}`,
+    meta: `${formatDate(match.date)} - ${match.time}`,
+    homeTeam: teams.home,
+    awayTeam: teams.away,
+    tag: match.description.startsWith('Thuis') ? 'Thuis' : 'Uit',
+    location: match.venue,
+  };
+});
+
+const provisionalStandings = Array.from(
+  new Set(newSeasonMatches.flatMap((match) => [match.homeTeam, match.awayTeam])),
+)
+  .sort((a, b) => a.localeCompare(b, 'nl-BE'))
+  .map((team, index) => ({ position: index + 1, team }));
+
 const combinedMatches = [
-  ...upcomingMatches.map((match) => {
-    const teams = splitMatchTitle(match.title);
-    return {
-      key: `${match.title}-${match.date}-upcoming`,
-      meta: `${formatDate(match.date)} - ${match.time}`,
-      homeTeam: teams.home,
-      awayTeam: teams.away,
-      score: '-',
-      tag: match.description.startsWith('Thuis') ? 'Thuis' : 'Uit',
-    };
-  }),
   ...[...results].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).map((match) => ({
     key: `result-${match.id}`,
     meta: formatDate(match.date),

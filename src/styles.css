@@ -554,6 +554,11 @@ button { font: inherit; }
   font-size: 1.05rem;
   line-height: 1.4;
 }
+.stats-strip__location {
+  margin: .35rem 0 0;
+  color: rgba(245,240,232,.86);
+  font-size: .95rem;
+}
 
 .section-block { padding: 5.5rem 1.5rem; }
 .section-block--dark { background: linear-gradient(180deg, rgba(20,20,20,.9), rgba(13,13,13,.94)); }
@@ -791,6 +796,12 @@ button { font: inherit; }
   color: var(--wit);
   white-space: nowrap;
 }
+.match-line--with-location { padding-bottom: .8rem; }
+.match-line__location {
+  grid-column: 2 / -1;
+  color: rgba(245,240,232,.5);
+  font-size: .82rem;
+}
 
 .result-meta { display: flex; justify-content: space-between; gap: .75rem; flex-wrap: wrap; }
 .scoreline {
@@ -824,6 +835,22 @@ button { font: inherit; }
 .season-empty-state { padding: clamp(2rem, 6vw, 5rem); text-align: center; }
 .season-empty-state h2 { margin: .35rem 0 .75rem; }
 .season-empty-state > p:last-child { max-width: 620px; margin: 0 auto; color: rgba(245,240,232,.65); }
+.season-schedule { display: grid; gap: 2px; }
+.schedule-card {
+  display: grid;
+  grid-template-columns: 74px 1fr;
+  gap: 1rem;
+  padding: 1rem 1.1rem;
+  background: #151515;
+  border-left: 3px solid var(--rood);
+}
+.schedule-card__date { display: grid; align-content: center; text-align: center; }
+.schedule-card__date strong { color: var(--goud); font-family: 'Bebas Neue', sans-serif; font-size: 2rem; line-height: 1; }
+.schedule-card__date span,
+.schedule-card__match > span { color: rgba(245,240,232,.5); font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; }
+.schedule-card__match h3 { margin: .2rem 0 .35rem; }
+.schedule-card__venue,
+.agenda-item__venue { margin: .25rem 0 0; color: rgba(245,240,232,.7); font-size: .9rem; }
 .home-empty-state { margin: 0; color: rgba(245,240,232,.62); }
 .home-empty-state--light { color: rgba(255,255,255,.78); }
 .standings-table th, .standings-table td { padding: .8rem .6rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,.08); }
@@ -1516,6 +1543,13 @@ button { font: inherit; }
     padding: .9rem 1rem;
     align-items: start;
   }
+  .match-line--with-location {
+    grid-template-areas:
+      'date date tag'
+      'home score away'
+      'location location location';
+  }
+  .match-line__location { grid-area: location; }
   .match-line__date { grid-area: date; }
   .match-line__team--primary { grid-area: home; }
   .match-line__team--secondary { grid-area: away; }

@@ -3,7 +3,7 @@
     <div class="site-footer__inner">
       <div class="site-footer__brand">
         <strong>ZVK Onder Den Toren Veulen</strong>
-        <span>Heers, Belgie</span>
+        <span>Sporthallen Borgloon &amp; Heers, België</span>
       </div>
 
       <nav class="site-footer__links" aria-label="Footer navigatie">

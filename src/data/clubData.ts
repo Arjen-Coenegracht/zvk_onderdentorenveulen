@@ -639,7 +639,37 @@ export const squadPlayers: SquadPlayer[] = [
   },
 ];
 
-export const agenda: AgendaItem[] = [];
+const heersVenue = {
+  venue: 'Sportcentrum De Raes (Sporthal Heers)',
+};
+
+const borgloonVenue = {
+  venue: 'Sporthal Borgloon',
+};
+
+export const agenda: AgendaItem[] = [
+  { date: '2026-09-14', time: '21:00', title: 'ZVK ODT vs. ZVC Chaussée', description: 'Thuiswedstrijd', ...heersVenue },
+  { date: '2026-09-21', time: '19:00', title: 'Dynamo vs. ZVK ODT', description: 'Uitwedstrijd', ...heersVenue },
+  { date: '2026-09-28', time: '21:00', title: 'ZVK ODT vs. ZVC Zaadgranaat', description: 'Thuiswedstrijd', ...heersVenue },
+  { date: '2026-10-05', time: '21:00', title: 'Mamba FC vs. ZVK ODT', description: 'Uitwedstrijd', ...heersVenue },
+  { date: '2026-10-12', time: '22:00', title: 'ZVK ODT vs. ZVK Hoepertingen C', description: 'Thuiswedstrijd', ...heersVenue },
+  { date: '2026-10-19', time: '20:00', title: 'ZVK Hoepertingen B vs. ZVK ODT', description: 'Uitwedstrijd', ...borgloonVenue },
+  { date: '2026-10-26', time: '20:00', title: "'t Loon vs. ZVK ODT", description: 'Uitwedstrijd', ...borgloonVenue },
+  { date: '2026-11-09', time: '22:00', title: "ZVK ODT vs. ZVC 't Tulpke", description: 'Thuiswedstrijd', ...heersVenue },
+  { date: '2026-11-16', time: '20:00', title: 'LG Overrepen vs. ZVK ODT', description: 'Uitwedstrijd', ...heersVenue },
+  { date: '2026-12-07', time: '20:00', title: 'Dardanet Borgloon vs. ZVK ODT', description: 'Uitwedstrijd', ...borgloonVenue },
+  { date: '2026-12-14', time: '21:00', title: 'ZVK ODT vs. United Heers', description: 'Thuiswedstrijd', ...heersVenue },
+  { date: '2027-01-04', time: '22:00', title: 'BIH United vs. ZVK ODT', description: 'Uitwedstrijd', ...borgloonVenue },
+  { date: '2027-01-11', time: '21:00', title: 'ZVC Chaussée vs. ZVK ODT', description: 'Uitwedstrijd', ...heersVenue },
+  { date: '2027-01-18', time: '19:00', title: 'ZVK ODT vs. Dynamo', description: 'Thuiswedstrijd', ...heersVenue },
+  { date: '2027-01-25', time: '21:00', title: 'ZVC Zaadgranaat vs. ZVK ODT', description: 'Uitwedstrijd', ...borgloonVenue },
+  { date: '2027-02-01', time: '21:00', title: 'ZVK ODT vs. Mamba FC', description: 'Thuiswedstrijd', ...heersVenue },
+  { date: '2027-02-08', time: '22:00', title: 'ZVK Hoepertingen C vs. ZVK ODT', description: 'Uitwedstrijd', ...borgloonVenue },
+  { date: '2027-02-22', time: '20:00', title: 'ZVK ODT vs. ZVK Hoepertingen B', description: 'Thuiswedstrijd', ...borgloonVenue },
+  { date: '2027-03-01', time: '20:00', title: "ZVK ODT vs. 't Loon", description: 'Thuiswedstrijd', ...heersVenue },
+  { date: '2027-03-08', time: '22:00', title: "ZVC 't Tulpke vs. ZVK ODT", description: 'Uitwedstrijd', ...borgloonVenue },
+  { date: '2027-03-15', time: '20:00', title: 'ZVK ODT vs. LG Overrepen', description: 'Thuiswedstrijd', ...heersVenue },
+];
 
 export const transfers: TransferUpdate[] = [
   {

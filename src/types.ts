@@ -47,6 +47,7 @@ export interface AgendaItem {
   time: string;
   title: string;
   description: string;
+  venue?: string;
 }
 
 export interface TransferUpdate {

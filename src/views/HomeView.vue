@@ -44,6 +44,9 @@
         <span>Volgende match</span>
         <strong>{{ nextMatch ? formatMatchTitle(nextMatch.title) : 'Seizoen 2026–2027 volgt' }}</strong>
         <small>{{ nextMatch ? `${formatShortDate(nextMatch.date)} - ${nextMatch.time}` : 'Nog geen nieuwe kalender beschikbaar' }}</small>
+        <p v-if="nextMatch?.venue" class="stats-strip__location">
+          {{ nextMatch.venue }}
+        </p>
       </div>
     </section>
 
@@ -121,14 +124,17 @@
           </div>
 
           <div class="agenda-list">
-            <p v-if="agenda.length === 0" class="home-empty-state">
+            <p v-if="displayedAgenda.length === 0" class="home-empty-state">
               Nog geen wedstrijden beschikbaar voor seizoen 2026–2027.
             </p>
-            <article v-for="item in agenda" :key="item.title" class="agenda-item">
+            <article v-for="item in displayedAgenda" :key="item.title" class="agenda-item">
               <span>{{ formatDate(item.date) }}</span>
               <div>
                 <h3>{{ item.title }}</h3>
-                <p>{{ item.description }}</p>
+                <p>{{ item.time }} · {{ item.description }}</p>
+                <p v-if="item.venue" class="agenda-item__venue">
+                  {{ item.venue }}
+                </p>
               </div>
             </article>
           </div>
@@ -369,12 +375,14 @@ onMounted(() => {
 
 const toMatchDateTime = (date: string, time: string) => new Date(`${date}T${time}:00`);
 
-const nextMatch =
-  [...agenda]
-    .sort(
-      (a, b) => toMatchDateTime(a.date, a.time).getTime() - toMatchDateTime(b.date, b.time).getTime(),
-    )
-    .find((item) => toMatchDateTime(item.date, item.time).getTime() >= Date.now()) ?? null;
+const upcomingAgenda = [...agenda]
+  .filter((item) => toMatchDateTime(item.date, item.time).getTime() >= Date.now())
+  .sort(
+    (a, b) => toMatchDateTime(a.date, a.time).getTime() - toMatchDateTime(b.date, b.time).getTime(),
+  );
+
+const displayedAgenda = upcomingAgenda.slice(0, 3);
+const nextMatch = upcomingAgenda[0] ?? null;
 
 const formatDate = (date: string) =>
   new Intl.DateTimeFormat('nl-BE', {
