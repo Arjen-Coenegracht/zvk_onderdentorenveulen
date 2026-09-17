@@ -7,8 +7,8 @@
     "description": "Thuiswedstrijd",
     "venue": "Sportcentrum De Raes (Sporthal Heers)",
     "home": true,
-    "homeScore": 1,
-    "awayScore": 2
+    "homeScore": 5,
+    "awayScore": 0
   },
   {
     "id": "2026-09-21-dynamo",
