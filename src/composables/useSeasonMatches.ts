@@ -11,6 +11,7 @@ const loadSeasonMatches = () => {
 
   loadingPromise = fetch(
     `${import.meta.env.BASE_URL}data/matches-2026-2027.json`,
+    { cache: 'no-store' },
   )
     .then((response) => {
       if (!response.ok) {
@@ -23,8 +24,10 @@ const loadSeasonMatches = () => {
       seasonMatches.value = matches;
     })
     .catch((error) => {
-      loadingPromise = null;
       throw error;
+    })
+    .finally(() => {
+      loadingPromise = null;
     });
 
   return loadingPromise;
