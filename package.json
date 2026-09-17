@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "update-ranking": "node scripts/update-ranking.mjs",
     "update-score": "node scripts/update-score.mjs",
+    "update-player-stats": "node scripts/update-player-stats.mjs",
     "update-data": "npm run update-ranking"
   },
   "dependencies": {

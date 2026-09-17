@@ -34,7 +34,7 @@
             <div class="player-photo-wrap">
               <img
                 v-if="player.image"
-                :src="player.image"
+                :src="`${baseUrl}${player.image}`"
                 :alt="`Spelerfoto van ${player.name}`"
                 :class="[
                   'player-photo',
@@ -57,29 +57,22 @@
               </div>
             </div>
 
-            <div class="stats-mini-grid" v-if="player.customStats?.length">
-              <div v-for="stat in player.customStats" :key="stat.label" class="mini-stat">
-                <span>{{ stat.label }}</span>
-                <strong>{{ stat.value }}</strong>
-              </div>
-            </div>
-
-            <div v-else class="stats-mini-grid">
-              <div class="mini-stat">
-                <span>Matchen</span>
-                <strong>{{ player.matches }}</strong>
-              </div>
+            <div class="stats-mini-grid">
               <div class="mini-stat">
                 <span>Goals</span>
-                <strong>{{ player.goals }}</strong>
+                <strong>{{ statsFor(player.id).goals }}</strong>
               </div>
               <div class="mini-stat">
                 <span>Assists</span>
-                <strong>{{ player.assists }}</strong>
+                <strong>{{ statsFor(player.id).assists }}</strong>
               </div>
               <div class="mini-stat">
-                <span>MOTM</span>
-                <strong>{{ player.playerOfTheMatch }}</strong>
+                <span>Gele kaarten</span>
+                <strong>{{ statsFor(player.id).yellowCards }}</strong>
+              </div>
+              <div class="mini-stat">
+                <span>Rode kaarten</span>
+                <strong>{{ statsFor(player.id).redCards }}</strong>
               </div>
             </div>
           </article>
@@ -90,6 +83,31 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue';
 import { RouterLink } from 'vue-router';
-import { squadPlayers } from '@/data/clubData';
+import { usePlayers } from '@/composables/usePlayers';
+import { usePlayerStats } from '@/composables/usePlayerStats';
+import type { PlayerStats } from '@/types';
+
+const baseUrl = import.meta.env.BASE_URL;
+const { players: squadPlayers, loadPlayers } = usePlayers();
+const { playerStats, loadPlayerStats } = usePlayerStats();
+const emptyStats: Omit<PlayerStats, 'playerId'> = {
+  goals: 0,
+  assists: 0,
+  yellowCards: 0,
+  redCards: 0,
+};
+
+const statsFor = (playerId: string) =>
+  playerStats.value.find((stats) => stats.playerId === playerId) ?? emptyStats;
+
+onMounted(() => {
+  loadPlayers().catch((error) => {
+    console.error('Fout bij het laden van de spelers:', error);
+  });
+  loadPlayerStats().catch((error) => {
+    console.error('Fout bij het laden van de spelerstatistieken:', error);
+  });
+});
 </script>

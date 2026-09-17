@@ -839,6 +839,18 @@ button { font: inherit; }
 .season-empty-state { padding: clamp(2rem, 6vw, 5rem); text-align: center; }
 .season-empty-state h2 { margin: .35rem 0 .75rem; }
 .season-empty-state > p:last-child { max-width: 620px; margin: 0 auto; color: rgba(245,240,232,.65); }
+.home-standing-summary { margin: 0 0 1rem; color: rgba(245,240,232,.78); font-weight: 700; }
+.home-standings-table th,
+.home-standings-table td,
+.home-standings-table th:not(:nth-child(2)),
+.home-standings-table td:not(:nth-child(2)) {
+  text-align: left;
+}
+.home-standings-table .standings-table__rank { width: 8%; }
+.home-standings-table th:nth-child(2),
+.home-standings-table td:nth-child(2) { width: 38%; }
+.home-standings-table th:nth-child(n+3),
+.home-standings-table td:nth-child(n+3) { width: 9%; }
 .season-schedule { display: grid; gap: 2px; }
 .schedule-card {
   display: grid;
@@ -1849,6 +1861,74 @@ button { font: inherit; }
 
   .home-info-panel:has(.standings-table) .standings-table td:nth-child(2) {
     font-size: .82rem;
+  }
+}
+
+@media (max-width: 760px) {
+  .home-standings-table .standings-table__extra {
+    display: table-cell;
+  }
+
+  .home-standings-table .standings-table__rank {
+    width: 7%;
+  }
+
+  .home-standings-table th:nth-child(2),
+  .home-standings-table td:nth-child(2) {
+    width: 36%;
+  }
+
+  .home-standings-table th:nth-child(n+3),
+  .home-standings-table td:nth-child(n+3) {
+    width: 9.5%;
+    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-info-panel:has(.home-standings-table) .table-wrap {
+    margin-right: -.55rem;
+    margin-left: -.55rem;
+  }
+
+  .home-info-panel:has(.standings-table) .home-standings-table {
+    font-size: .68rem;
+  }
+
+  .home-info-panel:has(.standings-table) .home-standings-table th,
+  .home-info-panel:has(.standings-table) .home-standings-table td {
+    padding: .5rem .12rem;
+    font-size: .72rem;
+  }
+
+  .home-standings-table th:first-child,
+  .home-standings-table td:first-child,
+  .home-standings-table th:nth-child(2),
+  .home-standings-table td:nth-child(2) {
+    text-align: left;
+  }
+
+  .home-standings-table th:nth-child(n+3),
+  .home-standings-table td:nth-child(n+3) {
+    text-align: center;
+  }
+
+  .home-info-panel:has(.standings-table) .home-standings-table td:nth-child(2) {
+    font-size: .72rem;
+  }
+
+  .home-standings-table .standings-table__rank {
+    width: 6%;
+  }
+
+  .home-standings-table th:nth-child(2),
+  .home-standings-table td:nth-child(2) {
+    width: 36%;
+  }
+
+  .home-standings-table th:nth-child(n+3),
+  .home-standings-table td:nth-child(n+3) {
+    width: 9.66%;
   }
 }
 

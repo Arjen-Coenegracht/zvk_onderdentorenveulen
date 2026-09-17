@@ -153,13 +153,21 @@
             </RouterLink>
           </div>
 
+          <p v-if="currentTeamStanding" class="home-standing-summary">
+            ODT staat momenteel {{ currentTeamStanding.position }}e met
+            {{ currentTeamStanding.points }} punten.
+          </p>
+
           <div v-if="homeStandings.length" class="table-wrap">
-            <table class="standings-table">
+            <table class="standings-table home-standings-table">
               <thead>
                 <tr>
                   <th class="standings-table__rank">#</th>
                   <th>Ploeg</th>
                   <th>GP</th>
+                  <th class="standings-table__extra">DV</th>
+                  <th class="standings-table__extra">DT</th>
+                  <th class="standings-table__extra">DS</th>
                   <th>Pts</th>
                 </tr>
               </thead>
@@ -167,16 +175,22 @@
                 <tr
                   v-for="row in homeStandings"
                   :key="row.team"
-                  :class="{ 'is-team-row': row.team === currentTeamStanding.team }"
+                  :class="{ 'is-team-row': isOurTeam(row.team) }"
                 >
                   <td class="standings-table__rank">{{ row.position }}</td>
                   <td>{{ row.team }}</td>
                   <td>{{ row.played }}</td>
+                  <td class="standings-table__extra">{{ row.goalsFor }}</td>
+                  <td class="standings-table__extra">{{ row.goalsAgainst }}</td>
+                  <td class="standings-table__extra">{{ formatGoalDifference(row.goalDifference) }}</td>
                   <td>{{ row.points }}</td>
                 </tr>
               </tbody>
             </table>
           </div>
+          <p v-else-if="homeRankingLoading" class="home-empty-state home-empty-state--light">
+            Klassement laden...
+          </p>
           <p v-else class="home-empty-state home-empty-state--light">
             Nog geen klassement beschikbaar voor seizoen 2026–2027.
           </p>
@@ -341,8 +355,27 @@ import teamPhotoOne from '@/assets/teamfotos/Teamfoto.jpg';
 import teamPhotoTwo from '@/assets/teamfotos/Teamfoto2.jpg';
 import eindhovenGroupImage from '@/assets/trips/eindhoven/Eindhoven_foto_groep.jpg';
 
-const currentTeamStanding = { team: teamName };
-const homeStandings: StandingRow[] = [];
+const allStandings = ref<StandingRow[]>([]);
+const homeRankingLoading = ref(true);
+const homeStandings = computed(() => allStandings.value.slice(0, 5));
+
+const normalizeTeamName = (value: string) =>
+  value
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]/g, '');
+
+const teamAliases = [teamName, 'ZVK Onder den Toren Veulen', 'Onder De Toren Veulen'];
+const isOurTeam = (value: string) =>
+  teamAliases.some((alias) => normalizeTeamName(value) === normalizeTeamName(alias));
+
+const currentTeamStanding = computed(() =>
+  allStandings.value.find((row) => isOurTeam(row.team)),
+);
+
+const formatGoalDifference = (goalDifference: number) =>
+  goalDifference > 0 ? `+${goalDifference}` : goalDifference;
 const featuredSponsors = sponsors.filter((sponsor) => sponsor.category === 'Hoofdsponsor');
 const selectedTransfer = ref<TransferUpdate | null>(null);
 const hasScrolled = ref(false);
@@ -376,6 +409,23 @@ onMounted(() => {
   loadSeasonMatches().catch((error) => {
     console.error('Fout bij het laden van de kalender:', error);
   });
+  fetch(`${import.meta.env.BASE_URL}data/ranking.json`, { cache: 'no-store' })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`Klassement kon niet geladen worden: ${response.status}`);
+      }
+
+      return response.json() as Promise<StandingRow[]>;
+    })
+    .then((standings) => {
+      allStandings.value = standings.sort((a, b) => a.position - b.position);
+    })
+    .catch((error) => {
+      console.error('Fout bij het laden van het klassement:', error);
+    })
+    .finally(() => {
+      homeRankingLoading.value = false;
+    });
 });
 
 const toMatchDateTime = (date: string, time: string) => new Date(`${date}T${time}:00`);

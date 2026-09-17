@@ -67,19 +67,18 @@ export interface TransferUpdate {
   article: string[];
 }
 
-export interface PlayerStat {
-  label: string;
-  value: number | string;
-}
-
 export interface SquadPlayer {
+  id: string;
   name: string;
   number: number;
   position: string;
+  image?: string;
+}
+
+export interface PlayerStats {
+  playerId: string;
   goals: number;
   assists: number;
-  matches: number;
-  playerOfTheMatch: number;
-  image?: string;
-  customStats?: PlayerStat[];
+  yellowCards: number;
+  redCards: number;
 }

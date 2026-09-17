@@ -1,0 +1,13 @@
+[
+  { "id": "rune-paque", "name": "Rune Paque", "number": 1, "position": "Keeper", "image": "images/players/rune.svg" },
+  { "id": "arjen-coenegracht", "name": "Arjen Coenegracht", "number": 8, "position": "Bankzitter", "image": "images/players/Arjen.svg" },
+  { "id": "milan-schroyen", "name": "Milan Schroyen", "number": 9, "position": "Verdediger", "image": "images/players/Schroyen_Speler_kaart.svg" },
+  { "id": "yoran-knaepen", "name": "Yoran Knaepen", "number": 10, "position": "All rounder", "image": "images/players/Yoran.svg" },
+  { "id": "rens-vanekan", "name": "Rens Vanekan", "number": 14, "position": "Aanvaller", "image": "images/players/Rens.svg" },
+  { "id": "pedro-santos", "name": "Pedro Santos", "number": 25, "position": "All rounder", "image": "images/players/Pedro.svg" },
+  { "id": "math-royer", "name": "Math Royer", "number": 60, "position": "Aanvaller", "image": "images/players/math.svg" },
+  { "id": "devin-thirion", "name": "Devin Thirion", "number": 69, "position": "Skiller", "image": "images/players/Devin.svg" },
+  { "id": "bipin-naeten", "name": "Bipin Naeten", "number": 81, "position": "Aanvaller", "image": "images/players/bipin.svg" },
+  { "id": "robbe-grosemans", "name": "Robbe Grosemans", "number": 96, "position": "Bankzitter", "image": "images/players/Robbe.svg" },
+  { "id": "nicolas-libert", "name": "Nicolas Libert", "number": 99, "position": "Verdediger", "image": "images/players/Libert.svg" }
+]
