@@ -330,10 +330,11 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { RouterLink } from 'vue-router';
 import SectionTitle from '@/components/SectionTitle.vue';
-import { agenda, clubValues, sponsors, teamName, transfers } from '@/data/clubData';
+import { clubValues, sponsors, teamName, transfers } from '@/data/clubData';
+import { useSeasonMatches } from '@/composables/useSeasonMatches';
 import type { StandingRow, TransferUpdate } from '@/types';
 import logoImage from '@/assets/branding/ODT_LOGO.svg';
 import teamPhotoOne from '@/assets/teamfotos/Teamfoto.jpg';
@@ -345,6 +346,7 @@ const homeStandings: StandingRow[] = [];
 const featuredSponsors = sponsors.filter((sponsor) => sponsor.category === 'Hoofdsponsor');
 const selectedTransfer = ref<TransferUpdate | null>(null);
 const hasScrolled = ref(false);
+const { seasonMatches, loadSeasonMatches } = useSeasonMatches();
 
 const getFeaturedSponsorImageClasses = (name: string) => [
   'sponsor-card__image',
@@ -371,18 +373,23 @@ onBeforeUnmount(() => {
 onMounted(() => {
   handleScroll();
   window.addEventListener('scroll', handleScroll, { passive: true });
+  loadSeasonMatches().catch((error) => {
+    console.error('Fout bij het laden van de kalender:', error);
+  });
 });
 
 const toMatchDateTime = (date: string, time: string) => new Date(`${date}T${time}:00`);
 
-const upcomingAgenda = [...agenda]
-  .filter((item) => toMatchDateTime(item.date, item.time).getTime() >= Date.now())
-  .sort(
-    (a, b) => toMatchDateTime(a.date, a.time).getTime() - toMatchDateTime(b.date, b.time).getTime(),
-  );
+const upcomingAgenda = computed(() =>
+  [...seasonMatches.value]
+    .filter((item) => toMatchDateTime(item.date, item.time).getTime() >= Date.now())
+    .sort(
+      (a, b) => toMatchDateTime(a.date, a.time).getTime() - toMatchDateTime(b.date, b.time).getTime(),
+    ),
+);
 
-const displayedAgenda = upcomingAgenda.slice(0, 3);
-const nextMatch = upcomingAgenda[0] ?? null;
+const displayedAgenda = computed(() => upcomingAgenda.value.slice(0, 3));
+const nextMatch = computed(() => upcomingAgenda.value[0] ?? null);
 
 const formatDate = (date: string) =>
   new Intl.DateTimeFormat('nl-BE', {

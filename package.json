@@ -8,8 +8,8 @@
     "build": "vue-tsc -b && vite build && node scripts/generate-static-routes.mjs",
     "preview": "vite preview",
     "update-ranking": "node scripts/update-ranking.mjs",
-    "update-matches": "node scripts/update-matches.mjs",
-    "update-data": "npm run update-ranking && npm run update-matches"
+    "update-score": "node scripts/update-score.mjs",
+    "update-data": "npm run update-ranking"
   },
   "dependencies": {
     "cheerio": "^1.2.0",

@@ -1,0 +1,109 @@
+name: Wedstrijduitslag aanpassen
+
+on:
+  workflow_dispatch:
+    inputs:
+      match_id:
+        description: Wedstrijd
+        required: true
+        type: choice
+        options:
+          - '14/09/2026 - ZVK ODT vs. ZVC Chaussée | 2026-09-14-chaussee'
+          - '21/09/2026 - Dynamo vs. ZVK ODT | 2026-09-21-dynamo'
+          - '28/09/2026 - ZVK ODT vs. ZVC Zaadgranaat | 2026-09-28-zaadgranaat'
+          - '05/10/2026 - Mamba FC vs. ZVK ODT | 2026-10-05-mamba'
+          - '12/10/2026 - ZVK ODT vs. ZVK Hoepertingen C | 2026-10-12-hoepertingen-c'
+          - '19/10/2026 - ZVK Hoepertingen B vs. ZVK ODT | 2026-10-19-hoepertingen-b'
+          - "26/10/2026 - 't Loon vs. ZVK ODT | 2026-10-26-loon"
+          - "09/11/2026 - ZVK ODT vs. ZVC 't Tulpke | 2026-11-09-tulpke"
+          - '16/11/2026 - LG Overrepen vs. ZVK ODT | 2026-11-16-overrepen'
+          - '07/12/2026 - Dardanet Borgloon vs. ZVK ODT | 2026-12-07-dardanet'
+          - '14/12/2026 - ZVK ODT vs. United Heers | 2026-12-14-united-heers'
+          - '04/01/2027 - BIH United vs. ZVK ODT | 2027-01-04-bih'
+          - '11/01/2027 - ZVC Chaussée vs. ZVK ODT | 2027-01-11-chaussee'
+          - '18/01/2027 - ZVK ODT vs. Dynamo | 2027-01-18-dynamo'
+          - '25/01/2027 - ZVC Zaadgranaat vs. ZVK ODT | 2027-01-25-zaadgranaat'
+          - '01/02/2027 - ZVK ODT vs. Mamba FC | 2027-02-01-mamba'
+          - '08/02/2027 - ZVK Hoepertingen C vs. ZVK ODT | 2027-02-08-hoepertingen-c'
+          - '22/02/2027 - ZVK ODT vs. ZVK Hoepertingen B | 2027-02-22-hoepertingen-b'
+          - "01/03/2027 - ZVK ODT vs. 't Loon | 2027-03-01-loon"
+          - "08/03/2027 - ZVC 't Tulpke vs. ZVK ODT | 2027-03-08-tulpke"
+          - '15/03/2027 - ZVK ODT vs. LG Overrepen | 2027-03-15-overrepen'
+      our_score:
+        description: Onze score
+        required: true
+        type: string
+      opponent_score:
+        description: Score tegenstander
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  update-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Uitslag aanpassen
+        env:
+          MATCH_ID: ${{ inputs.match_id }}
+          OUR_SCORE: ${{ inputs.our_score }}
+          OPPONENT_SCORE: ${{ inputs.opponent_score }}
+        run: npm run update-score
+
+      - name: Wijziging opslaan
+        env:
+          MATCH_ID: ${{ inputs.match_id }}
+        run: |
+          if git diff --quiet -- public/data/matches-2026-2027.json; then
+            echo "De uitslag was al hetzelfde."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add public/data/matches-2026-2027.json
+            git commit -m "Update uitslag $MATCH_ID"
+            git push origin HEAD:main
+          fi
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Klassement bijwerken
+        run: npm run update-ranking
+
+      - name: Build
+        run: npm run build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

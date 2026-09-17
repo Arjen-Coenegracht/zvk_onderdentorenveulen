@@ -49,8 +49,13 @@ export interface AgendaItem {
   title: string;
   description: string;
   venue?: string;
-  homeScore?: number;
-  awayScore?: number;
+}
+
+export interface SeasonMatch extends AgendaItem {
+  id: string;
+  home: boolean;
+  homeScore: number | null;
+  awayScore: number | null;
 }
 
 export interface TransferUpdate {

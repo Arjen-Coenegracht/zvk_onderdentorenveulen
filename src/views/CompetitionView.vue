@@ -365,7 +365,8 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
-import { agenda, teamName } from '@/data/clubData';
+import { teamName } from '@/data/clubData';
+import { useSeasonMatches } from '@/composables/useSeasonMatches';
 import type { MatchResult, StandingRow } from '@/types';
 
 /*
@@ -375,6 +376,7 @@ import type { MatchResult, StandingRow } from '@/types';
 */
 
 const selectedSeason = ref('2026-2027');
+const { seasonMatches, loadSeasonMatches } = useSeasonMatches();
 
 const isPreviousSeason = computed(
   () => selectedSeason.value === '2025-2026',
@@ -451,6 +453,9 @@ const loadStandings = async () => {
 onMounted(() => {
   loadStandings();
   loadPreviousMatches();
+  loadSeasonMatches().catch((error) => {
+    console.error('Fout bij het laden van de kalender:', error);
+  });
 });
 
 /*
@@ -488,12 +493,6 @@ const formatGoalDifference = (goalDifference: number) =>
 |--------------------------------------------------------------------------
 */
 
-const seasonMatches = [...agenda].sort(
-  (a, b) =>
-    new Date(a.date).getTime() -
-    new Date(b.date).getTime(),
-);
-
 const formatDate = (date: string) =>
   new Intl.DateTimeFormat('nl-BE', {
     day: '2-digit',
@@ -509,24 +508,29 @@ const splitMatchTitle = (title: string) => {
   };
 };
 
-const newSeasonMatches = seasonMatches.map((match) => {
-  const teams = splitMatchTitle(match.title);
+const newSeasonMatches = computed(() =>
+  [...seasonMatches.value]
+    .sort(
+      (a, b) =>
+        new Date(a.date).getTime() - new Date(b.date).getTime(),
+    )
+    .map((match) => {
+      const teams = splitMatchTitle(match.title);
 
-  return {
-    key: `${match.date}-${match.title}`,
-    meta: `${formatDate(match.date)} - ${match.time}`,
-    homeTeam: teams.home,
-    awayTeam: teams.away,
-    score:
-      match.homeScore !== undefined && match.awayScore !== undefined
-        ? `${match.homeScore} - ${match.awayScore}`
-        : '-',
-    tag: match.description.startsWith('Thuis')
-      ? 'Thuis'
-      : 'Uit',
-    location: match.venue,
-  };
-});
+      return {
+        key: match.id,
+        meta: `${formatDate(match.date)} - ${match.time}`,
+        homeTeam: teams.home,
+        awayTeam: teams.away,
+        score:
+          typeof match.homeScore === 'number' && typeof match.awayScore === 'number'
+            ? `${match.homeScore} - ${match.awayScore}`
+            : '-',
+        tag: match.home ? 'Thuis' : 'Uit',
+        location: match.venue,
+      };
+    }),
+);
 
 /*
 |--------------------------------------------------------------------------
