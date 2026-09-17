@@ -1,0 +1,20 @@
+[
+  { "id": 1, "date": "2025-09-29", "opponent": "Mamba FC", "home": true, "scored": 4, "conceded": 2 },
+  { "id": 2, "date": "2025-10-13", "opponent": "ZVC Chaussee", "home": false, "scored": 2, "conceded": 4 },
+  { "id": 3, "date": "2025-10-20", "opponent": "'t Loon", "home": true, "scored": 10, "conceded": 2 },
+  { "id": 4, "date": "2025-11-03", "opponent": "Dardanet", "home": false, "scored": 7, "conceded": 6 },
+  { "id": 5, "date": "2025-11-10", "opponent": "Futsal Lions", "home": true, "scored": 2, "conceded": 3 },
+  { "id": 6, "date": "2025-11-24", "opponent": "BIH United", "home": false, "scored": 1, "conceded": 3 },
+  { "id": 7, "date": "2025-12-08", "opponent": "FC De Schuddertjes", "home": true, "scored": 6, "conceded": 5 },
+  { "id": 8, "date": "2026-01-05", "opponent": "Ham Hoepertingen", "home": false, "scored": 1, "conceded": 5 },
+  { "id": 9, "date": "2026-01-12", "opponent": "Dynamo Heers", "home": true, "scored": 4, "conceded": 5 },
+  { "id": 10, "date": "2026-02-02", "opponent": "Mamba FC", "home": false, "scored": 4, "conceded": 2 },
+  { "id": 11, "date": "2026-02-09", "opponent": "ZVC Chaussee", "home": true, "scored": 1, "conceded": 6 },
+  { "id": 12, "date": "2026-03-02", "opponent": "'t Loon", "home": false, "scored": 10, "conceded": 5 },
+  { "id": 13, "date": "2026-03-16", "opponent": "Dardanet", "home": true, "scored": 12, "conceded": 7 },
+  { "id": 14, "date": "2026-03-23", "opponent": "Futsal Lions", "home": false, "scored": 3, "conceded": 4 },
+  { "id": 15, "date": "2026-04-20", "opponent": "BIH United", "home": true, "scored": 2, "conceded": 3 },
+  { "id": 16, "date": "2026-05-04", "opponent": "FC De Schuddertjes", "home": false, "scored": 6, "conceded": 5 },
+  { "id": 17, "date": "2026-05-18", "opponent": "Ham Hoepertingen", "home": true, "scored": 8, "conceded": 2 },
+  { "id": 18, "date": "2026-06-01", "opponent": "Dynamo Heers", "home": false, "scored": 3, "conceded": 2 }
+]

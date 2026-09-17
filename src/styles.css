@@ -854,6 +854,15 @@ button { font: inherit; }
 .home-empty-state { margin: 0; color: rgba(245,240,232,.62); }
 .home-empty-state--light { color: rgba(255,255,255,.78); }
 .standings-table th, .standings-table td { padding: .8rem .6rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,.08); }
+.standings-table th:not(:nth-child(2)),
+.standings-table td:not(:nth-child(2)) {
+  text-align: right;
+}
+
+.standings-table th:nth-child(2),
+.standings-table td:nth-child(2) {
+  text-align: left;
+}
 .standings-table th {
   color: rgba(245,240,232,.6);
   font-family: 'Barlow Condensed', sans-serif;

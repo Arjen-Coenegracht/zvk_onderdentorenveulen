@@ -1,0 +1,122 @@
+[
+  {
+    "position": 1,
+    "team": "ZVC Chaussee",
+    "played": 17,
+    "won": 17,
+    "drawn": 0,
+    "lost": 0,
+    "goalsFor": 112,
+    "goalsAgainst": 25,
+    "goalDifference": 87,
+    "points": 51
+  },
+  {
+    "position": 2,
+    "team": "Futsal Lions",
+    "played": 16,
+    "won": 10,
+    "drawn": 2,
+    "lost": 4,
+    "goalsFor": 91,
+    "goalsAgainst": 64,
+    "goalDifference": 27,
+    "points": 32
+  },
+  {
+    "position": 3,
+    "team": "Onder De Toren Veulen",
+    "played": 18,
+    "won": 10,
+    "drawn": 0,
+    "lost": 8,
+    "goalsFor": 86,
+    "goalsAgainst": 71,
+    "goalDifference": 15,
+    "points": 30
+  },
+  {
+    "position": 4,
+    "team": "Dynamo Heers",
+    "played": 15,
+    "won": 9,
+    "drawn": 2,
+    "lost": 4,
+    "goalsFor": 84,
+    "goalsAgainst": 45,
+    "goalDifference": 39,
+    "points": 29
+  },
+  {
+    "position": 5,
+    "team": "Ham Hoepertingen",
+    "played": 18,
+    "won": 8,
+    "drawn": 1,
+    "lost": 9,
+    "goalsFor": 69,
+    "goalsAgainst": 77,
+    "goalDifference": -8,
+    "points": 25
+  },
+  {
+    "position": 6,
+    "team": "BIH United",
+    "played": 16,
+    "won": 6,
+    "drawn": 4,
+    "lost": 6,
+    "goalsFor": 48,
+    "goalsAgainst": 54,
+    "goalDifference": -6,
+    "points": 22
+  },
+  {
+    "position": 7,
+    "team": "Dardanet",
+    "played": 15,
+    "won": 7,
+    "drawn": 0,
+    "lost": 8,
+    "goalsFor": 89,
+    "goalsAgainst": 100,
+    "goalDifference": -11,
+    "points": 21
+  },
+  {
+    "position": 8,
+    "team": "'t Loon",
+    "played": 16,
+    "won": 4,
+    "drawn": 1,
+    "lost": 11,
+    "goalsFor": 58,
+    "goalsAgainst": 115,
+    "goalDifference": -57,
+    "points": 13
+  },
+  {
+    "position": 9,
+    "team": "FC De Schuddertjes",
+    "played": 15,
+    "won": 4,
+    "drawn": 0,
+    "lost": 11,
+    "goalsFor": 71,
+    "goalsAgainst": 85,
+    "goalDifference": -14,
+    "points": 12
+  },
+  {
+    "position": 10,
+    "team": "Mamba FC",
+    "played": 16,
+    "won": 1,
+    "drawn": 0,
+    "lost": 15,
+    "goalsFor": 41,
+    "goalsAgainst": 113,
+    "goalDifference": -72,
+    "points": 3
+  }
+]

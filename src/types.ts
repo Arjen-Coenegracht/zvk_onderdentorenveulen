@@ -16,6 +16,7 @@ export interface StandingRow {
   lost: number;
   goalsFor: number;
   goalsAgainst: number;
+  goalDifference: number;
   points: number;
 }
 
@@ -48,6 +49,8 @@ export interface AgendaItem {
   title: string;
   description: string;
   venue?: string;
+  homeScore?: number;
+  awayScore?: number;
 }
 
 export interface TransferUpdate {
