@@ -18,8 +18,8 @@
     "description": "Uitwedstrijd",
     "venue": "Sportcentrum De Raes (Sporthal Heers)",
     "home": false,
-    "homeScore": null,
-    "awayScore": null
+    "homeScore": 0,
+    "awayScore": 5
   },
   {
     "id": "2026-09-28-zaadgranaat",
