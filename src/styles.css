@@ -798,7 +798,8 @@ button { font: inherit; }
 }
 .match-line--with-location { padding-bottom: .8rem; }
 .match-line__location {
-  grid-column: 2 / -1;
+  grid-column: 2 / 5;
+  text-align: center;
   color: rgba(245,240,232,.5);
   font-size: .82rem;
 }
@@ -1655,33 +1656,55 @@ button { font: inherit; }
     width: 100%;
     min-width: 0;
     table-layout: fixed;
-    font-size: .76rem;
+    font-size: .68rem;
   }
   .standings-table th,
   .standings-table td {
-    padding: .46rem .24rem;
+    padding: .46rem .08rem;
   }
   .standings-table th {
-    font-size: .6rem;
-    letter-spacing: .05em;
+    font-size: .55rem;
+    letter-spacing: .02em;
   }
-  .standings-table td:nth-child(2),
-  .standings-table th:nth-child(2) {
-    width: 42%;
+  .competition-panel--standings .standings-table .standings-table__rank {
+    width: 8%;
+    text-align: center;
   }
-  .standings-table td:nth-child(3),
-  .standings-table th:nth-child(3),
-  .standings-table td:nth-child(4),
-  .standings-table th:nth-child(4) {
+  .competition-panel--standings .standings-table td:nth-child(2),
+  .competition-panel--standings .standings-table th:nth-child(2) {
+    width: 49%;
+  }
+  .competition-panel--standings .standings-table td:nth-child(3),
+  .competition-panel--standings .standings-table th:nth-child(3) {
+    width: 13%;
+    text-align: center;
+  }
+  .competition-panel--standings .standings-table td:nth-child(9),
+  .competition-panel--standings .standings-table th:nth-child(9) {
+    display: table-cell;
     width: 14%;
     text-align: center;
   }
-  .standings-table td:nth-child(2) {
-    font-size: .78rem;
+  .competition-panel--standings .standings-table td:nth-child(10),
+  .competition-panel--standings .standings-table th:nth-child(10) {
+    width: 16%;
+    text-align: center;
+  }
+  .competition-panel--standings .standings-table td:nth-child(2) {
+    font-size: .72rem;
     line-height: 1.2;
     word-break: break-word;
   }
-  .standings-table__extra {
+  .competition-panel--standings .standings-table td:nth-child(4),
+  .competition-panel--standings .standings-table th:nth-child(4),
+  .competition-panel--standings .standings-table td:nth-child(5),
+  .competition-panel--standings .standings-table th:nth-child(5),
+  .competition-panel--standings .standings-table td:nth-child(6),
+  .competition-panel--standings .standings-table th:nth-child(6),
+  .competition-panel--standings .standings-table td:nth-child(7),
+  .competition-panel--standings .standings-table th:nth-child(7),
+  .competition-panel--standings .standings-table td:nth-child(8),
+  .competition-panel--standings .standings-table th:nth-child(8) {
     display: none;
   }
 }
@@ -1705,24 +1728,18 @@ button { font: inherit; }
   .team-gallery__item--large { min-height: 220px; }
   .transfer-card__image-wrap { min-height: 180px; }
   .standings-table {
-    font-size: .68rem;
+    font-size: .62rem;
   }
   .standings-table th,
   .standings-table td {
-    padding: .38rem .18rem;
+    padding: .38rem .04rem;
   }
-  .standings-table td:nth-child(2),
-  .standings-table th:nth-child(2) {
-    width: 44%;
+  .competition-panel--standings .standings-table td:nth-child(2),
+  .competition-panel--standings .standings-table th:nth-child(2) {
+    width: 49%;
   }
-  .standings-table td:nth-child(3),
-  .standings-table th:nth-child(3),
-  .standings-table td:nth-child(4),
-  .standings-table th:nth-child(4) {
-    width: 13%;
-  }
-  .standings-table td:nth-child(2) {
-    font-size: .7rem;
+  .competition-panel--standings .standings-table td:nth-child(2) {
+    font-size: .65rem;
   }
   .match-line {
     gap: .2rem .45rem;
