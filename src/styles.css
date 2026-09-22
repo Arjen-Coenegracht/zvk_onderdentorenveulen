@@ -1451,6 +1451,9 @@ button { font: inherit; }
   .modal-card__meta { grid-template-columns: 1fr; }
 }
 @media (min-width: 921px) {
+  .competition-panel--standings {
+    align-self: start;
+  }
   .home-grid-two--showcase {
     align-items: stretch;
   }
