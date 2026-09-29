@@ -29,8 +29,8 @@
     "description": "Thuiswedstrijd",
     "venue": "Sportcentrum De Raes (Sporthal Heers)",
     "home": true,
-    "homeScore": null,
-    "awayScore": null
+    "homeScore": 8,
+    "awayScore": 5
   },
   {
     "id": "2026-10-05-mamba",
