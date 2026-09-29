@@ -3,9 +3,6 @@ name: Deploy static content to Pages
 on:
   push:
     branches: ['main']
-  schedule:
-    - cron: '0 0 * * 2'
-      timezone: 'Europe/Brussels'
   workflow_dispatch:
 
 permissions:
@@ -40,8 +37,7 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Update ranking
-        run: npm run update-ranking
+      # Het klassement wordt handmatig bijgehouden in public/data/ranking.json.
 
       - name: Build
         run: npm run build

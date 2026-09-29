@@ -2,7 +2,7 @@
   {
     "playerId": "rune-paque",
     "goals": 0,
-    "assists": 0,
+    "assists": 1,
     "yellowCards": 0,
     "redCards": 0
   },
@@ -15,29 +15,29 @@
   },
   {
     "playerId": "milan-schroyen",
-    "goals": 0,
+    "goals": 2,
     "assists": 1,
     "yellowCards": 0,
     "redCards": 0
   },
   {
     "playerId": "yoran-knaepen",
-    "goals": 0,
-    "assists": 0,
+    "goals": 2,
+    "assists": 1,
     "yellowCards": 0,
     "redCards": 0
   },
   {
     "playerId": "rens-vanekan",
-    "goals": 1,
+    "goals": 2,
     "assists": 0,
     "yellowCards": 0,
     "redCards": 0
   },
   {
     "playerId": "pedro-santos",
-    "goals": 0,
-    "assists": 0,
+    "goals": 1,
+    "assists": 1,
     "yellowCards": 0,
     "redCards": 0
   },
@@ -50,8 +50,8 @@
   },
   {
     "playerId": "devin-thirion",
-    "goals": 0,
-    "assists": 0,
+    "goals": 1,
+    "assists": 2,
     "yellowCards": 0,
     "redCards": 0
   },
@@ -64,8 +64,8 @@
   },
   {
     "playerId": "robbe-grosemans",
-    "goals": 0,
-    "assists": 0,
+    "goals": 1,
+    "assists": 1,
     "yellowCards": 1,
     "redCards": 0
   },

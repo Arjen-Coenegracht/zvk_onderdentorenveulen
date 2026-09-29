@@ -20,24 +20,24 @@ on:
           - 'Robbe Grosemans | robbe-grosemans'
           - 'Nicolas Libert | nicolas-libert'
       goals:
-        description: Totaal aantal goals
-        required: true
-        default: '0'
+        description: 'goals: +2 = optellen, 2 = totaal, leeg = behouden'
+        required: false
+        default: '+0'
         type: string
       assists:
-        description: Totaal aantal assists
-        required: true
-        default: '0'
+        description: 'assists: +2 = optellen, 2 = totaal, leeg = behouden'
+        required: false
+        default: '+0'
         type: string
       yellow_cards:
-        description: Totaal aantal gele kaarten
-        required: true
-        default: '0'
+        description: 'gele kaarten: +2 = optellen, 2 = totaal, leeg = behouden'
+        required: false
+        default: '+0'
         type: string
       red_cards:
-        description: Totaal aantal rode kaarten
-        required: true
-        default: '0'
+        description: 'rode kaarten: +2 = optellen, 2 = totaal, leeg = behouden'
+        required: false
+        default: '+0'
         type: string
 
 permissions:
@@ -97,8 +97,7 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Klassement bijwerken
-        run: npm run update-ranking
+      # Het klassement wordt handmatig bijgehouden in public/data/ranking.json.
 
       - name: Build
         run: npm run build

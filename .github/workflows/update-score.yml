@@ -93,8 +93,7 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Klassement bijwerken
-        run: npm run update-ranking
+      # Het klassement wordt handmatig bijgehouden in public/data/ranking.json.
 
       - name: Build
         run: npm run build
