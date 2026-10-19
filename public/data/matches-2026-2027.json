@@ -51,8 +51,8 @@
     "description": "Thuiswedstrijd",
     "venue": "Sportcentrum De Raes (Sporthal Heers)",
     "home": true,
-    "homeScore": null,
-    "awayScore": null
+    "homeScore": 4,
+    "awayScore": 2
   },
   {
     "id": "2026-10-19-hoepertingen-b",
