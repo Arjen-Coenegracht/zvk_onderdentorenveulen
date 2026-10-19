@@ -62,8 +62,8 @@
     "description": "Uitwedstrijd",
     "venue": "Sporthal Borgloon",
     "home": false,
-    "homeScore": null,
-    "awayScore": null
+    "homeScore": 4,
+    "awayScore": 6
   },
   {
     "id": "2026-10-26-loon",
