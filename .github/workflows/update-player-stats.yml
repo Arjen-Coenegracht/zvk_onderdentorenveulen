@@ -19,13 +19,14 @@ on:
           - 'Bipin Naeten | bipin-naeten'
           - 'Robbe Grosemans | robbe-grosemans'
           - 'Nicolas Libert | nicolas-libert'
+          - 'Kenzo Thrion | kenzo-thrion'
       goals:
         description: 'goals: +2 = optellen, 2 = totaal, leeg = behouden'
         required: false
         default: '+0'
         type: string
       assists:
-        description: 'assists: +2 = optellen, 2 = totaal, leeg = behouden'
+        description: 'assists: +2 of +0.5 = optellen, 2 = totaal, leeg = behouden'
         required: false
         default: '+0'
         type: string

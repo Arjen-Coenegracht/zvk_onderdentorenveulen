@@ -1,77 +1,84 @@
 [
   {
     "playerId": "rune-paque",
-    "goals": 0,
-    "assists": 1,
-    "yellowCards": 0,
-    "redCards": 0
-  },
-  {
-    "playerId": "arjen-coenegracht",
-    "goals": 0,
-    "assists": 0,
-    "yellowCards": 0,
-    "redCards": 0
-  },
-  {
-    "playerId": "milan-schroyen",
-    "goals": 2,
-    "assists": 1,
-    "yellowCards": 0,
-    "redCards": 0
-  },
-  {
-    "playerId": "yoran-knaepen",
-    "goals": 2,
-    "assists": 1,
-    "yellowCards": 0,
-    "redCards": 0
-  },
-  {
-    "playerId": "rens-vanekan",
-    "goals": 2,
-    "assists": 0,
-    "yellowCards": 0,
-    "redCards": 0
-  },
-  {
-    "playerId": "pedro-santos",
-    "goals": 1,
-    "assists": 1,
-    "yellowCards": 0,
-    "redCards": 0
-  },
-  {
-    "playerId": "math-royer",
-    "goals": 0,
-    "assists": 0,
-    "yellowCards": 0,
-    "redCards": 0
-  },
-  {
-    "playerId": "devin-thirion",
     "goals": 1,
     "assists": 2,
     "yellowCards": 0,
     "redCards": 0
   },
   {
+    "playerId": "arjen-coenegracht",
+    "goals": 1,
+    "assists": 0.5,
+    "yellowCards": 0,
+    "redCards": 0
+  },
+  {
+    "playerId": "milan-schroyen",
+    "goals": 6,
+    "assists": 3,
+    "yellowCards": 0,
+    "redCards": 0
+  },
+  {
+    "playerId": "yoran-knaepen",
+    "goals": 6,
+    "assists": 2,
+    "yellowCards": 0,
+    "redCards": 0
+  },
+  {
+    "playerId": "rens-vanekan",
+    "goals": 2,
+    "assists": 1,
+    "yellowCards": 0,
+    "redCards": 0
+  },
+  {
+    "playerId": "pedro-santos",
+    "goals": 1,
+    "assists": 3,
+    "yellowCards": 0,
+    "redCards": 0
+  },
+  {
+    "playerId": "math-royer",
+    "goals": 2,
+    "assists": 2,
+    "yellowCards": 0,
+    "redCards": 0
+  },
+  {
+    "playerId": "devin-thirion",
+    "goals": 2,
+    "assists": 8,
+    "yellowCards": 0,
+    "redCards": 0
+  },
+  {
     "playerId": "bipin-naeten",
-    "goals": 0,
+    "goals": 2,
     "assists": 0,
     "yellowCards": 0,
     "redCards": 0
   },
   {
     "playerId": "robbe-grosemans",
-    "goals": 1,
-    "assists": 1,
+    "goals": 2,
+    "assists": 2,
     "yellowCards": 1,
     "redCards": 0
   },
   {
     "playerId": "nicolas-libert",
     "goals": 0,
+    "assists": 0,
+    "yellowCards": 0,
+    "redCards": 0
+  },
+  {
+    "playerId": "kenzo-thrion",
+    "goals": 5,
     "assists": 0,
     "yellowCards": 0,
     "redCards": 0

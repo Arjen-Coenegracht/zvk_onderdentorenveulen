@@ -40,6 +40,7 @@
                   'player-photo',
                   {
                     'player-photo--bipin': player.name === 'Bipin Naeten',
+                    'player-photo--kenzo': player.id === 'kenzo-thrion',
                   },
                 ]"
               />

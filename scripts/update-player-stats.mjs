@@ -4,17 +4,18 @@ import path from 'node:path';
 const playerSelection = process.env.PLAYER_ID ?? process.argv[2];
 const playerId = playerSelection?.split('|').at(-1)?.trim();
 
-const parseStat = (value, label, current) => {
+const parseStat = (value, label, current, allowHalf = false) => {
   const input = (value ?? '').trim();
   if (input === '') return current;
-  if (!/^\+?\d+$/.test(input)) {
+  if (!(allowHalf ? /^\+?\d+(?:\.5|\.0)?$/ : /^\+?\d+$/).test(input)) {
     throw new Error(`${label}: gebruik +2 om op te tellen, 2 als totaal, of laat leeg om te behouden.`);
   }
 
   const amount = Number(input);
   const result = input.startsWith('+') ? current + amount : amount;
-  if (!Number.isSafeInteger(amount) || !Number.isSafeInteger(result) || result < 0) {
-    throw new Error(`${label} levert geen geldig geheel getal op.`);
+  const scale = allowHalf ? 2 : 1;
+  if (!Number.isSafeInteger(amount * scale) || !Number.isSafeInteger(result * scale) || result < 0) {
+    throw new Error(`${label} levert geen geldig ${allowHalf ? 'veelvoud van 0.5' : 'geheel getal'} op.`);
   }
   return result;
 };
@@ -33,7 +34,7 @@ if (!playerStats) {
 
 const values = {
   goals: parseStat(process.env.GOALS ?? process.argv[3], 'Goals', playerStats.goals),
-  assists: parseStat(process.env.ASSISTS ?? process.argv[4], 'Assists', playerStats.assists),
+  assists: parseStat(process.env.ASSISTS ?? process.argv[4], 'Assists', playerStats.assists, true),
   yellowCards: parseStat(process.env.YELLOW_CARDS ?? process.argv[5], 'Gele kaarten', playerStats.yellowCards),
   redCards: parseStat(process.env.RED_CARDS ?? process.argv[6], 'Rode kaarten', playerStats.redCards),
 };

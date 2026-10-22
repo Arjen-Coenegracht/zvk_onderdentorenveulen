@@ -1343,6 +1343,9 @@ button { font: inherit; }
   height: 100%;
   object-fit: cover;
 }
+.player-photo--kenzo {
+  object-fit: contain;
+}
 .player-photo--bipin {
   object-fit: contain;
   object-position: center bottom;
