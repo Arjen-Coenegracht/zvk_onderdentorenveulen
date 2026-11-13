@@ -635,20 +635,6 @@ button { font: inherit; }
   gap: 1.4rem;
   margin-top: 2rem;
 }
-.club-news {
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,.08);
-  background: rgba(255,255,255,.03);
-}
-.club-news__image {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-.club-news__body {
-  max-width: 80ch;
-  padding: clamp(1.2rem, 3vw, 2.5rem);
-}
 .team-gallery .team-gallery__item--large img {
   height: auto;
 }
@@ -1134,6 +1120,14 @@ button { font: inherit; }
   object-position: center 28%;
   padding: 0;
   background: transparent;
+}
+.modal-card__image-wrap--article {
+  aspect-ratio: auto;
+}
+.modal-card__image-wrap--article .modal-card__image {
+  height: auto;
+  object-fit: contain;
+  padding: 0;
 }
 .sponsor-card__image--nijs-chris,
 .modal-card__image--nijs-chris {
@@ -2087,4 +2081,39 @@ button { font: inherit; }
     opacity: .09;
     background-size: 64px 64px;
   }
+}
+
+
+.news-carousel { position: relative; margin-top: 2.5rem; }
+.news-carousel__viewport { overflow: hidden; padding: 12px 6% 24px; touch-action: pan-y; }
+.news-carousel__track { display: flex; gap: 24px; transition: transform .7s cubic-bezier(.22,1,.36,1); }
+.news-slide { flex: 0 0 100%; position: relative; min-width: 0; height: 620px; overflow: hidden; border-radius: 18px; background: #171717; opacity: .4; transform: scale(.95); transition: opacity .7s, transform .7s; isolation: isolate; }
+.news-slide.is-active { opacity: 1; transform: scale(1); box-shadow: 0 16px 30px #0004; }
+.news-slide__image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 35%; }
+.news-slide__shade { position: absolute; inset: 0; background: linear-gradient(180deg, #0000 20%, #10090988 48%, #100909f5 88%); }
+.news-slide__body { position: absolute; bottom: 0; left: 0; padding: clamp(1.5rem,4vw,3.5rem); width: 100%; }
+.news-slide__category { display: inline-block; margin: 0 0 1rem; background: var(--rood, #c82430); color: white; padding: .4rem .8rem; text-transform: uppercase; letter-spacing: .15em; font-size: .72rem; font-weight: 800; }
+.news-slide__body h3 { max-width: 19ch; margin: 0; color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.3rem,5vw,4.5rem); line-height: 1; }
+.news-slide__intro { max-width: 62ch; color: #e4dcd8; line-height: 1.65; margin: 1rem 0; }
+.news-slide__read { display: inline-flex; align-items: center; gap: 2rem; border: 0; border-bottom: 1px solid #ffffff66; padding: .65rem 0; background: none; color: white; font: inherit; font-weight: 700; cursor: pointer; }
+.news-slide__read span { font-size: 1.5rem; transition: transform .2s; }
+.news-slide__read:hover span { transform: translate(3px,-3px); }
+.news-carousel__footer { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0 6%; }
+.news-carousel__dots { display: flex; align-items: center; gap: 8px; }
+.news-carousel__navigation { display: flex; flex-direction: column; align-items: center; gap: .25rem; }
+.news-carousel__counter { font-size: .8rem; opacity: .65; font-variant-numeric: tabular-nums; }
+.news-carousel__dots button { position: relative; width: 28px; height: 32px; border: 0; background: none; cursor: pointer; padding: 0; }
+.news-carousel__dots button::after { content: ''; display: block; height: 4px; width: 12px; margin: auto; border-radius: 4px; background: #ffffff44; transition: width .4s, background .4s; }
+.news-carousel__dots button.is-active::after { width: 28px; background: var(--rood, #c82430); }
+.news-carousel__hint { font-size: .75rem; opacity: .5; }
+.news-carousel button:focus-visible { outline: 2px solid white; outline-offset: 5px; }
+@media (max-width: 650px) {
+  .news-slide { height: 580px; border-radius: 12px; }
+  .news-slide__body { padding: 1.4rem; }
+  .news-slide__intro { font-size: .88rem; }
+  .news-carousel__hint { display: none; }
+  .news-carousel__footer { justify-content: center; gap: 2rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .news-carousel__track, .news-slide, .news-carousel button, .news-slide__read span { transition: none; }
 }

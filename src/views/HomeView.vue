@@ -102,32 +102,6 @@
       </div>
     </section>
 
-    <section class="section-block section-block--dark">
-      <div class="container">
-        <SectionTitle
-          eyebrow="Clubnieuws"
-          title="18 op 18: Schroyen kan niet wachten tot de kleedkamer"
-          description="Devin schittert tegen ’t Tulpke, Schroyen viert op zijn eigen manier."
-        />
-        <article class="club-news">
-          <img
-            v-if="celebrationPhoto"
-            :src="celebrationPhoto"
-            alt="De ploeg viert de 18 op 18 met een speels moment tussen Schroyen en Devin"
-            class="club-news__image js-lightbox-trigger"
-            loading="lazy"
-          />
-          <div class="club-news__body">
-            <p class="section-kicker">9 november 2026 · ZVK ODT – ZVC ’t Tulpke: 7–3</p>
-            <p>Een zesde overwinning op rij, 18 op 18 en een Devin in bloedvorm: bij ODT was er na de 7–3 tegen ’t Tulpke meer dan genoeg reden om te vieren. Met drie assists zette Devin zijn ploegmaats op weg naar alweer drie punten.</p>
-            <p>Schroyen was zo onder de indruk dat hij blijkbaar niet kon wachten tot in de kleedkamer om Devin uit de kleren te zien. Tijdens de ploegfoto kreeg Devins shirt alvast een stevigheidstest. Een gewone schouderklop was na zo’n prestatie duidelijk niet genoeg.</p>
-            <p>Gelukkig bleef het bij wat trekwerk en een hoop gelach. Devin deelde op het veld de assists uit, Schroyen zorgde achteraf voor de extra animatie.</p>
-            <p>Met 18 punten uit de laatste zes wedstrijden houdt ODT de zegereeks vast. De afspraak voor de volgende match? Opnieuw alles geven voor elkaar. En voor Devin: misschien toch een reserveshirt meenemen.</p>
-          </div>
-        </article>
-      </div>
-    </section>
-
     <section class="section-block">
       <div class="container home-grid-two">
         <div class="panel panel--soft home-info-panel">
@@ -294,66 +268,76 @@
     <section class="section-block">
       <div class="container">
         <SectionTitle
-          eyebrow="Transfers"
-          title="Nieuwe versterking"
-          description="De nieuwste transfer richting Onder Den Toren Veulen."
+          eyebrow="Binnen de lijnen. Buiten de lijnen."
+          title="De verhalen van ODT"
+          description="Grote prestaties, sterke verhalen en alles daartussen."
         />
 
-        <div class="transfer-grid">
-          <article v-for="item in transfers" :key="item.name" class="transfer-card">
-            <div class="transfer-card__image-wrap">
-              <img
-                :src="item.image"
-                :alt="`Transferfoto van ${item.name}`"
-                class="transfer-card__image js-lightbox-trigger"
-              />
+        <div class="news-carousel" role="region" aria-roledescription="carrousel" aria-label="Clubnieuws"
+          tabindex="0" @keydown.left.prevent="changeArticle(-1)" @keydown.right.prevent="changeArticle(1)">
+          <div class="news-carousel__viewport" @touchstart.passive="startSwipe" @touchend.passive="endSwipe">
+            <div class="news-carousel__track" :style="{ transform: 'translateX(calc(' + (-activeArticleIndex * 100) + '% - ' + (activeArticleIndex * 24) + 'px))' }">
+              <article v-for="(article, index) in newsArticles" :key="article.headline"
+                class="news-slide" :class="{ 'is-active': index === activeArticleIndex }"
+                :inert="index !== activeArticleIndex" :aria-hidden="index !== activeArticleIndex"
+                aria-roledescription="dia" :aria-label="(index + 1) + ' van ' + newsArticles.length">
+                <img :src="article.image" :alt="'Foto bij ' + article.headline" class="news-slide__image" loading="lazy" />
+                <div class="news-slide__shade"></div>
+                <div class="news-slide__body">
+                  <p class="news-slide__category">{{ article.direction }}</p>
+                  <h3>{{ article.headline }}</h3>
+                  <p class="news-slide__intro">{{ article.note }}</p>
+                  <button type="button" class="news-slide__read" @click="selectedArticle = article">
+                    Lees het verhaal <span aria-hidden="true">&#8599;</span>
+                  </button>
+                </div>
+              </article>
             </div>
-
-            <div class="transfer-card__body">
-              <p class="section-kicker">{{ item.direction }}</p>
-              <h3>{{ item.headline }}</h3>
-              <p>{{ item.note }}</p>
-              <button
-                type="button"
-                class="button button-primary transfer-card__button"
-                @click="selectedTransfer = item"
-              >
-                Bekijk volledig artikel
-              </button>
+          </div>
+          <div class="news-carousel__footer">
+            <div class="news-carousel__navigation">
+            <div class="news-carousel__dots" role="group" aria-label="Kies een artikel">
+              <button v-for="(article, index) in newsArticles" :key="article.headline" type="button"
+                :class="{ 'is-active': index === activeArticleIndex }" :aria-label="article.headline"
+                :aria-pressed="index === activeArticleIndex" @click="activeArticleIndex = index"></button>
             </div>
-          </article>
+            <span class="news-carousel__counter" aria-live="polite" aria-atomic="true">{{ activeArticleIndex + 1 }} / {{ newsArticles.length }}</span>
+            </div>
+            <span class="news-carousel__hint">Blader door de verhalen</span>
+          </div>
         </div>
+
       </div>
     </section>
 
     <div
-      v-if="selectedTransfer"
+      v-if="selectedArticle"
       class="modal-backdrop"
-      @click.self="selectedTransfer = null"
+      @click.self="selectedArticle = null"
     >
       <article class="modal-card">
         <div class="modal-card__header">
           <div>
-            <p class="section-kicker">{{ selectedTransfer.direction }}</p>
-            <h2>{{ selectedTransfer.headline }}</h2>
+            <p class="section-kicker">{{ selectedArticle.direction }}</p>
+            <h2>{{ selectedArticle.headline }}</h2>
           </div>
-          <button type="button" class="modal-close" @click="selectedTransfer = null">
+          <button type="button" class="modal-close" @click="selectedArticle = null">
             Sluiten
           </button>
         </div>
 
         <div class="modal-card__content">
-          <div class="modal-card__image-wrap">
+          <div class="modal-card__image-wrap modal-card__image-wrap--article">
             <img
-              :src="selectedTransfer.image"
-              :alt="`Transferfoto van ${selectedTransfer.name}`"
+              :src="selectedArticle.image"
+              :alt="`Transferfoto van ${selectedArticle.name}`"
               class="modal-card__image modal-card__image--transfer"
             />
           </div>
 
           <div class="modal-card__panel">
-            <h3>{{ selectedTransfer.name }}</h3>
-            <p v-for="paragraph in selectedTransfer.article" :key="paragraph">
+            <h3>{{ selectedArticle.name }}</h3>
+            <p v-for="paragraph in selectedArticle.article" :key="paragraph">
               {{ paragraph }}
             </p>
           </div>
@@ -374,6 +358,30 @@ import logoImage from '@/assets/branding/ODT_LOGO.svg';
 import eindhovenGroupImage from '@/assets/trips/eindhoven/Eindhoven_foto_groep.jpg';
 import recentTeamPhoto from '@/assets/teamfotos/TeamfotoNieuwSeizoen.jpg';
 import celebrationPhoto from '@/assets/teamfotos/DevinUitDeKleren.jpg';
+
+const celebrationArticle: TransferUpdate = { ...{
+  "name": "Devin en Schroyen",
+  "direction": "18 op 18",
+  "headline": "Schroyen kan niet wachten tot de kleedkamer",
+  "note": "Devin schittert met drie assists tegen ?t Tulpke. Na de zesde zege op rij neemt Schroyen tijdens de ploegfoto zijn shirt alvast onder handen.",
+  "article": [
+    "Een zesde overwinning op rij, 18 op 18 en een Devin in bloedvorm: bij ODT was er na de 7–3 tegen ’t Tulpke meer dan genoeg reden om te vieren. Met drie assists zette Devin zijn ploegmaats op weg naar alweer drie punten.",
+    "Schroyen was zo onder de indruk dat hij blijkbaar niet kon wachten tot in de kleedkamer om Devin uit de kleren te zien. Tijdens de ploegfoto kreeg Devins shirt alvast een stevigheidstest. Een gewone schouderklop was na zo’n prestatie duidelijk niet genoeg.",
+    "Gelukkig bleef het bij wat trekwerk en een hoop gelach. Devin deelde op het veld de assists uit, Schroyen zorgde achteraf voor de extra animatie.",
+    "Met 18 punten uit de laatste zes wedstrijden houdt ODT de zegereeks vast. De afspraak voor de volgende match? Opnieuw alles geven voor elkaar. En voor Devin: misschien toch een reserveshirt meenemen."
+  ]
+}, image: celebrationPhoto };
+const newsArticles = [celebrationArticle, ...transfers];
+const activeArticleIndex = ref(0);
+const changeArticle = (direction: number) => {
+  activeArticleIndex.value = (activeArticleIndex.value + direction + newsArticles.length) % newsArticles.length;
+};
+let swipeStartX = 0;
+const startSwipe = (event: TouchEvent) => { swipeStartX = event.changedTouches[0]?.clientX ?? 0; };
+const endSwipe = (event: TouchEvent) => {
+  const distance = (event.changedTouches[0]?.clientX ?? swipeStartX) - swipeStartX;
+  if (Math.abs(distance) > 50) changeArticle(distance < 0 ? 1 : -1);
+};
 
 const allStandings = ref<StandingRow[]>([]);
 const homeRankingLoading = ref(true);
@@ -397,7 +405,7 @@ const currentTeamStanding = computed(() =>
 const formatGoalDifference = (goalDifference: number) =>
   goalDifference > 0 ? `+${goalDifference}` : goalDifference;
 const featuredSponsors = sponsors.filter((sponsor) => sponsor.category === 'Hoofdsponsor');
-const selectedTransfer = ref<TransferUpdate | null>(null);
+const selectedArticle = ref<TransferUpdate | null>(null);
 const hasScrolled = ref(false);
 const { seasonMatches, loadSeasonMatches } = useSeasonMatches();
 
@@ -412,7 +420,7 @@ const handleScroll = () => {
   hasScrolled.value = window.scrollY > 24;
 };
 
-watch(selectedTransfer, (value) => {
+watch(selectedArticle, (value) => {
   document.body.classList.toggle('has-modal-open', Boolean(value));
   document.body.classList.toggle('has-transfer-modal', Boolean(value));
 });
