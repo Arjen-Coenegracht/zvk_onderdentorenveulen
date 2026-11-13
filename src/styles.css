@@ -631,9 +631,26 @@ button { font: inherit; }
 }
 .team-gallery {
   display: grid;
-  grid-template-columns: 1.3fr .7fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: 1.4rem;
   margin-top: 2rem;
+}
+.club-news {
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.03);
+}
+.club-news__image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.club-news__body {
+  max-width: 80ch;
+  padding: clamp(1.2rem, 3vw, 2.5rem);
+}
+.team-gallery .team-gallery__item--large img {
+  height: auto;
 }
 .team-gallery__cta {
   grid-column: 1 / -1;

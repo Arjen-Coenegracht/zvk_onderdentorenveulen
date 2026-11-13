@@ -84,8 +84,8 @@
     "description": "Thuiswedstrijd",
     "venue": "Sportcentrum De Raes (Sporthal Heers)",
     "home": true,
-    "homeScore": null,
-    "awayScore": null
+    "homeScore": 7,
+    "awayScore": 3
   },
   {
     "id": "2026-11-16-overrepen",

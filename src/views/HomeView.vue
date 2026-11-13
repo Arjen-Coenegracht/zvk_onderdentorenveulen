@@ -92,19 +92,39 @@
               Bekijk de spelerskern
             </RouterLink>
           </div>
-          <article class="team-gallery__item team-gallery__item--large">
+          <article v-if="recentTeamPhoto" class="team-gallery__item team-gallery__item--large">
             <img
-              :src="teamPhotoOne"
+              :src="recentTeamPhoto"
               alt="Teamfoto van ZVK Onder Den Toren Veulen"
             />
           </article>
-          <article class="team-gallery__item">
-            <img
-              :src="teamPhotoTwo"
-              alt="Tweede teamfoto van ZVK Onder Den Toren Veulen"
-            />
-          </article>
         </div>
+      </div>
+    </section>
+
+    <section class="section-block section-block--dark">
+      <div class="container">
+        <SectionTitle
+          eyebrow="Clubnieuws"
+          title="18 op 18: Schroyen kan niet wachten tot de kleedkamer"
+          description="Devin schittert tegen ’t Tulpke, Schroyen viert op zijn eigen manier."
+        />
+        <article class="club-news">
+          <img
+            v-if="celebrationPhoto"
+            :src="celebrationPhoto"
+            alt="De ploeg viert de 18 op 18 met een speels moment tussen Schroyen en Devin"
+            class="club-news__image js-lightbox-trigger"
+            loading="lazy"
+          />
+          <div class="club-news__body">
+            <p class="section-kicker">9 november 2026 · ZVK ODT – ZVC ’t Tulpke: 7–3</p>
+            <p>Een zesde overwinning op rij, 18 op 18 en een Devin in bloedvorm: bij ODT was er na de 7–3 tegen ’t Tulpke meer dan genoeg reden om te vieren. Met drie assists zette Devin zijn ploegmaats op weg naar alweer drie punten.</p>
+            <p>Schroyen was zo onder de indruk dat hij blijkbaar niet kon wachten tot in de kleedkamer om Devin uit de kleren te zien. Tijdens de ploegfoto kreeg Devins shirt alvast een stevigheidstest. Een gewone schouderklop was na zo’n prestatie duidelijk niet genoeg.</p>
+            <p>Gelukkig bleef het bij wat trekwerk en een hoop gelach. Devin deelde op het veld de assists uit, Schroyen zorgde achteraf voor de extra animatie.</p>
+            <p>Met 18 punten uit de laatste zes wedstrijden houdt ODT de zegereeks vast. De afspraak voor de volgende match? Opnieuw alles geven voor elkaar. En voor Devin: misschien toch een reserveshirt meenemen.</p>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -351,9 +371,9 @@ import { clubValues, sponsors, teamName, transfers } from '@/data/clubData';
 import { useSeasonMatches } from '@/composables/useSeasonMatches';
 import type { StandingRow, TransferUpdate } from '@/types';
 import logoImage from '@/assets/branding/ODT_LOGO.svg';
-import teamPhotoOne from '@/assets/teamfotos/Teamfoto.jpg';
-import teamPhotoTwo from '@/assets/teamfotos/Teamfoto2.jpg';
 import eindhovenGroupImage from '@/assets/trips/eindhoven/Eindhoven_foto_groep.jpg';
+import recentTeamPhoto from '@/assets/teamfotos/TeamfotoNieuwSeizoen.jpg';
+import celebrationPhoto from '@/assets/teamfotos/DevinUitDeKleren.jpg';
 
 const allStandings = ref<StandingRow[]>([]);
 const homeRankingLoading = ref(true);
