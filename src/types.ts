@@ -64,6 +64,7 @@ export interface TransferUpdate {
   headline: string;
   note: string;
   image: string;
+  imageAlt?: string;
   article: string[];
 }
 

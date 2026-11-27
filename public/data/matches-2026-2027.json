@@ -95,8 +95,8 @@
     "description": "Uitwedstrijd",
     "venue": "Sportcentrum De Raes (Sporthal Heers)",
     "home": false,
-    "homeScore": null,
-    "awayScore": null
+    "homeScore": 3,
+    "awayScore": 6
   },
   {
     "id": "2026-12-07-dardanet",

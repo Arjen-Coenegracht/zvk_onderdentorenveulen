@@ -281,7 +281,7 @@
                 class="news-slide" :class="{ 'is-active': index === activeArticleIndex }"
                 :inert="index !== activeArticleIndex" :aria-hidden="index !== activeArticleIndex"
                 aria-roledescription="dia" :aria-label="(index + 1) + ' van ' + newsArticles.length">
-                <img :src="article.image" :alt="'Foto bij ' + article.headline" class="news-slide__image" loading="lazy" />
+                <img :src="article.image" alt="" class="news-slide__image" loading="lazy" />
                 <div class="news-slide__shade"></div>
                 <div class="news-slide__body">
                   <p class="news-slide__category">{{ article.direction }}</p>
@@ -330,7 +330,7 @@
           <div class="modal-card__image-wrap modal-card__image-wrap--article">
             <img
               :src="selectedArticle.image"
-              :alt="`Transferfoto van ${selectedArticle.name}`"
+              :alt="selectedArticle.imageAlt ?? `Foto bij ${selectedArticle.headline}`"
               class="modal-card__image modal-card__image--transfer"
             />
           </div>
@@ -358,6 +358,21 @@ import logoImage from '@/assets/branding/ODT_LOGO.svg';
 import eindhovenGroupImage from '@/assets/trips/eindhoven/Eindhoven_foto_groep.jpg';
 import recentTeamPhoto from '@/assets/teamfotos/TeamfotoNieuwSeizoen.jpg';
 import celebrationPhoto from '@/assets/teamfotos/DevinUitDeKleren.jpg';
+import winterWeekendPhoto from '@/assets/news/winterweekend-heers.jpg';
+
+const winterWeekendArticle: TransferUpdate = {
+  name: '5 en 6 december 2026',
+  direction: 'Winterweekend',
+  headline: 'ODT staat achter de toog op het Winterweekend in Heers',
+  note: 'Op 5 en 6 december staat ODT met een eigen stand op het Winterweekend in Heers. Kom langs voor een drankje, pasta, frietjes of frituursnacks en daag je maten uit met een potje nagelkloppen.',
+  image: winterWeekendPhoto,
+  imageAlt: 'Fotomontage met drie ODT-spelers achter de toog van een winterkraam',
+  article: [
+    'Op zaterdag 5 en zondag 6 december trekken we met onze eigen stand naar het Winterweekend in Heers. Drank genoeg, en de opstelling ligt al vast: de ene helft schenkt in, de andere helft drinkt op. Na de rust wisselen we van kant.',
+    'Honger gekregen? We hebben pasta’s, frietjes en frituursnacks. Zin in wat competitie? Daag je maten uit met een potje nagelkloppen en laat zien hoe vlot jij een nagel in de boomstam krijgt.',
+    'Breng je maten mee. Tot aan de toog in Heers!',
+  ],
+};
 
 const celebrationArticle: TransferUpdate = { ...{
   "name": "Devin en Schroyen",
@@ -371,7 +386,7 @@ const celebrationArticle: TransferUpdate = { ...{
     "Met 18 punten uit de laatste zes wedstrijden houdt ODT de zegereeks vast. De afspraak voor de volgende match? Opnieuw alles geven voor elkaar. En voor Devin: misschien toch een reserveshirt meenemen."
   ]
 }, image: celebrationPhoto };
-const newsArticles = [celebrationArticle, ...transfers];
+const newsArticles = [winterWeekendArticle, celebrationArticle, ...transfers];
 const activeArticleIndex = ref(0);
 const changeArticle = (direction: number) => {
   activeArticleIndex.value = (activeArticleIndex.value + direction + newsArticles.length) % newsArticles.length;
